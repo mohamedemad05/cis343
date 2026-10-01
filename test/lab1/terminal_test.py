@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Exercise the actual terminal prompt on macOS/Linux, including Ctrl-C/D."""
 
 import os
@@ -91,3 +92,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# --- end AI code ---

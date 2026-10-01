@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Run scanner and CLI checks; optionally save the exact results in Markdown."""
 
 import argparse
@@ -134,3 +135,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# --- end AI code ---

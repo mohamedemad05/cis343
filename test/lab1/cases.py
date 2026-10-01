@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Hand-written expectations. Each token is (type, lexeme, literal, line)."""
 
 
@@ -137,3 +138,4 @@ CASES = [
       token("SAY", "say", line=2), token("STRING", '"Ember"', "Ember", 2),
       token("SEMICOLON", ";", line=2), eof(3)], []),
 ]
+# --- end AI code ---

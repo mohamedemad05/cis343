@@ -1,3 +1,5 @@
+// --- start AI code ---
 /* outer
  /* inner */
  end */say
+// --- end AI code ---

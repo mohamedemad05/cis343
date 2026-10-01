@@ -221,10 +221,16 @@ The detailed test evidence is part of this report:
   actual transcript, exit status, and match result.
 
 Sources and independently written expectations are in `test/lab1/cases.py`.
-Each source is also committed under `test/lab1/inputs/`. The runner checks that
-these files match the case definitions byte for byte after UTF-8 decoding;
-this preserves the line-ending tests. CLI tests launch the real entry point
-in a subprocess. Special file-error inputs are made in temporary directories
+Each source is also committed under `test/lab1/inputs/`, enclosed in
+`// --- start AI code ---` and `// --- end AI code ---` attribution markers.
+The runner verifies and removes the exact wrapper before comparing the enclosed
+source with the case definition. It preserves all original bytes, including
+line endings and whether the source ends with a newline. File-mode checks write
+that enclosed source to a temporary `.ember` file and launch the real entry point
+in a subprocess. This keeps the attribution comments from changing EOF and
+unterminated-string tests. Running a marked file directly includes the wrapper
+in scanning, so its line numbers and malformed-input results may differ from
+the recorded tests. Special file-error inputs are made in temporary directories
 by the test script and removed afterward. Expected values are never generated
 from scanner output. Both test scripts exit unsuccessfully if a comparison fails.
 

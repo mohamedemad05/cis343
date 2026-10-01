@@ -63,6 +63,11 @@ def main():
         fixture = ROOT / "test/lab1/inputs" / (name + ".ember")
         # Reading bytes preserves CR and CRLF, which are themselves test inputs.
         saved_source = fixture.read_bytes().decode("utf-8")
+        prefix = "// --- start AI code ---\n"
+        suffix = "\n// --- end AI code ---\n"
+        if not saved_source.startswith(prefix) or not saved_source.endswith(suffix):
+            raise AssertionError(f"Missing AI attribution markers: {name}")
+        saved_source = saved_source[len(prefix):-len(suffix)]
         if saved_source != source:
             raise AssertionError(f"Fixture differs from hand-written case: {name}")
         scanner = Scanner(saved_source)
@@ -73,8 +78,13 @@ def main():
         expected_cli = (output(expected_tokens),
                         "".join(error + "\n" for error in errors),
                         65 if errors else 0)
-        check(name + " / file", purpose, repr(source), expected_cli,
-              cli([str(fixture.relative_to(ROOT))]))
+        # Attribution is metadata, not part of the tested source. In particular,
+        # appending a comment would change unterminated-string and EOF cases.
+        with tempfile.TemporaryDirectory() as directory:
+            source_file = Path(directory) / fixture.name
+            source_file.write_bytes(saved_source.encode("utf-8"))
+            check(name + " / file", purpose, repr(source), expected_cli,
+                  cli([str(source_file)]))
 
     expected_types = {t[0] for case in CASES for t in case[3]}
     check("token coverage", "Every declared token type has a positive test.",

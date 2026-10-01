@@ -1,2 +1,5 @@
+// --- start AI code ---
 let count = 2;
 say "Ember";
+
+// --- end AI code ---

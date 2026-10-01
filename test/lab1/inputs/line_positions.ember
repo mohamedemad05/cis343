@@ -1,3 +1,5 @@
+// --- start AI code ---
 let
 "x"
 42;
+// --- end AI code ---

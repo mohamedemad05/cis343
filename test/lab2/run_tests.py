@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Check the hard-coded ASTs and optionally record all results."""
 
 import argparse
@@ -78,3 +79,4 @@ def main():
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# --- end AI code ---

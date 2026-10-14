@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Hard-coded Ember expression trees and their expected printed forms."""
 
 from pathlib import Path
@@ -72,3 +73,4 @@ if __name__ == "__main__":
     printer = AstPrinter()
     for name, _, expression, _ in CASES:
         print(f"{name}: {printer.print(expression)}")
+# --- end AI code ---

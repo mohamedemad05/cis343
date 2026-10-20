@@ -1,4 +1,3 @@
-# --- start AI code ---
 """Scan, parse, and print one Ember expression from a file or terminal input."""
 
 import sys
@@ -72,4 +71,3 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
-# --- end AI code ---

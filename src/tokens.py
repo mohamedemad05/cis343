@@ -1,4 +1,3 @@
-# --- start AI code ---
 """Token types and the information kept for each token."""
 
 from dataclasses import dataclass
@@ -55,4 +54,3 @@ class Token:
 
     def __str__(self):
         return f"{self.type.name} {self.lexeme!r} {self.literal!r} [line {self.line}]"
-# --- end AI code ---

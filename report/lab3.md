@@ -263,7 +263,7 @@ inputs are stored in memory; very deep trees are rejected as described above.
 The Parser API assumes complete scanner output ending in EOF.
 
 AI assistance was used for the implementation, tests, reports, and diagram.
-Python source files, including reused AI-written components, are enclosed by
+Python test files are enclosed by
 `# --- start AI code ---` and `# --- end AI code ---`. These use Python's comment
 syntax while retaining the required marker wording. The Ember example uses
 the requested `//` marker syntax. Earlier submission commits remain unchanged;

@@ -1,4 +1,3 @@
-# --- start AI code ---
 """Recursive-descent parser for one Ember expression followed by EOF."""
 
 from expr import Binary, Grouping, Literal, Unary
@@ -112,4 +111,3 @@ class Parser:
         token = self.peek()
         location = "at end" if token.type is T.EOF else f"at {token.lexeme!r}"
         return ParseError(f"[line {token.line}] Error {location}: {message}")
-# --- end AI code ---

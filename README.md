@@ -53,6 +53,6 @@ test/lab3/           Parser source cases, example file, and tests
 report/               Reports, recorded outputs, and the Lab 3 tree image
 ```
 
-AI-generated Python code is marked using Python comments. The Ember source
+AI-generated Python test code is marked using Python comments. The Ember source
 fixtures use `//` comments. See each report for details. Prior submission
 commits stay available in GitHub history.

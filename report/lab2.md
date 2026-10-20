@@ -1,8 +1,5 @@
 # Lab 2: Ember AST printer
 
-This report preserves the Lab 2 AST-printer results. The Lab 3 revision adds
-attribution markers to the reused implementation; the original Lab 2 commit is unchanged.
-
 ## Scope and design
 
 This lab adds expression trees and a printer to Ember. Trees are built directly

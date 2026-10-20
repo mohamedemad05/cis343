@@ -1,40 +1,58 @@
-# Ember — Labs 1 and 2
+# Ember — Labs 1, 2, and 3
 
-A Python scanner for a small language inspired by Chapter 4 of *Crafting
-Interpreters*. It prints tokens; it does not execute programs.
+Ember is a small language project based on *Crafting Interpreters*. It now scans
+and parses expressions and prints their ASTs. It does not evaluate them.
 
-Requires Python 3.10+ and no external packages. From this directory:
+Requires Python 3.10+ and no third-party packages. Run from the repository root:
 
 ```sh
-# Scan a file
-python3 src/main.py test/lab1/inputs/example.ember
+# Lab 3: parse an expression file
+python3 src/main.py test/lab3/example.ember
 
-# Interactive prompt
+# Lab 3: interactive expression prompt
 python3 src/main.py
 
-# Reproduce the tests and detailed report
-python3 test/lab1/run_tests.py --report
+# Lab 1: scanner-only mode
+python3 src/main.py --tokens test/lab1/inputs/example.ember
 
-# Additional real terminal tests (macOS/Linux)
-python3 test/lab1/terminal_test.py --report
+# Lab 2: print hard-coded ASTs
+python3 test/lab2/examples.py
 ```
 
-The [lab report](report/lab1.md) explains the grammar, design decisions,
-setup, test results, limitations, and extra-credit features.
+The Lab 3 example prints `(+ 1 (* 2 3))`. Each source file or prompt submission
+must contain exactly one expression; trailing tokens, including semicolons, are
+errors. Syntax and lexical errors produce diagnostics without an AST.
 
-Lab 2 adds hard-coded expression trees and a parenthesized AST printer:
+Run the portable test suites and regenerate their result reports:
 
 ```sh
-python3 test/lab2/examples.py
+python3 test/lab1/run_tests.py --report
 python3 test/lab2/run_tests.py --report
+python3 test/lab3/run_tests.py --report
 ```
 
-See the [Lab 2 draft report](report/lab2.md) for its expression grammar and results.
-Lab 2 is a draft with AI attribution still pending.
+Additional terminal checks on macOS/Linux:
+
+```sh
+python3 test/lab1/terminal_test.py --report
+python3 test/lab3/terminal_test.py --report
+```
+
+Reports include grammar, setup, limitations, expected/actual results, and any
+extra-credit request:
+
+- [Lab 1: scanner](report/lab1.md)
+- [Lab 2: AST printer](report/lab2.md)
+- [Lab 3: parser and concrete syntax tree](report/lab3.md)
 
 ```text
-src/                  Tokens, scanner, entry point, AST nodes, and printer
-test/lab1/            Test scripts, expectations, and source inputs
-test/lab2/            Hard-coded AST examples and printer tests
-report/               Lab report and actual test results
+src/                  Scanner, tokens, AST classes, printer, parser, entry point
+test/lab1/           Scanner inputs and tests (--tokens mode)
+test/lab2/           Hard-coded AST examples and tests
+test/lab3/           Parser source cases, example file, and tests
+report/               Reports, recorded outputs, and the Lab 3 tree image
 ```
+
+AI-generated Python code is marked using Python comments. The Ember source
+fixtures use `//` comments. See each report for details. Prior submission
+commits stay available in GitHub history.

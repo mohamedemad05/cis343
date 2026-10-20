@@ -1,6 +1,7 @@
 # Lab 2: Ember AST printer
 
-Draft. AI attribution has been deferred; it must be completed before submission.
+This report preserves the Lab 2 AST-printer results. The Lab 3 revision adds
+attribution markers to the reused implementation; the original Lab 2 commit is unchanged.
 
 ## Scope and design
 
@@ -143,7 +144,7 @@ python3 test/lab1/terminal_test.py
 
 The last command requires macOS or Linux because it uses pseudo-terminal APIs.
 The Lab 2 commands do not depend on those APIs. The scanner remains available
-through `python3 src/main.py`; the AST examples are a separate test program.
+through `python3 src/main.py --tokens`; the AST examples are a separate test program.
 
 ## Test results
 
@@ -187,7 +188,7 @@ float literals raise `ValueError`. Dataclass type annotations alone do not
 validate a manually assembled tree. Deeply nested trees are limited by Python's
 recursion depth. Numeric output is a diagnostic representation, not a guaranteed
 round-trippable Ember source literal; very small or large floats may use exponent
-notation. No AST generator or extra-credit feature is submitted for this draft.
+notation. No AST generator or extra-credit feature is submitted for Lab 2.
 
 ## Reference
 

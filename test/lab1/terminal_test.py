@@ -19,7 +19,7 @@ def session(interrupt=False):
     attributes = termios.tcgetattr(slave)
     attributes[3] &= ~termios.ECHO
     termios.tcsetattr(slave, termios.TCSANOW, attributes)
-    process = subprocess.Popen([sys.executable, str(ROOT / "src/main.py")],
+    process = subprocess.Popen([sys.executable, str(ROOT / "src/main.py"), "--tokens"],
                                stdin=slave, stdout=slave, stderr=slave)
     # Keep the slave open until captured output is drained (including on macOS).
     transcript = []

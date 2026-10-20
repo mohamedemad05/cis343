@@ -1,18 +1,41 @@
-"""Run Ember's scanner on a UTF-8 file or one terminal line at a time."""
+# --- start AI code ---
+"""Scan, parse, and print one Ember expression from a file or terminal input."""
 
 import sys
 
 from scanner import Scanner
+from parser import ParseError, Parser
+from ast_printer import AstPrinter
 
 
 class Ember:
+    def __init__(self, tokens_only=False):
+        self.tokens_only = tokens_only
+
     def run(self, source):
         scanner = Scanner(source)
-        for token in scanner.scan_tokens():
-            print(token)
+        tokens = scanner.scan_tokens()
+        if self.tokens_only:
+            for token in tokens:
+                print(token)
         for error in scanner.errors:
             print(error, file=sys.stderr)
-        return 65 if scanner.errors else 0
+        if scanner.errors:
+            return 65
+        if self.tokens_only:
+            return 0
+        try:
+            tree = Parser(tokens).parse()
+            output = AstPrinter().print(tree)
+        except ParseError as error:
+            print(error, file=sys.stderr)
+            return 65
+        except RecursionError:
+            print(f"[line {tokens[0].line}] Error: Expression tree is too deep to print.", file=sys.stderr)
+            return 65
+        # Build the whole string before printing, so errors never leave a partial AST.
+        print(output)
+        return 0
 
     def run_file(self, path):
         try:
@@ -34,11 +57,14 @@ class Ember:
 
 
 def main(argv=None):
-    arguments = sys.argv[1:] if argv is None else argv
-    if len(arguments) > 1:
-        print("Usage: python3 src/main.py [source.ember]", file=sys.stderr)
+    arguments = list(sys.argv[1:] if argv is None else argv)
+    tokens_only = bool(arguments and arguments[0] == "--tokens")
+    if tokens_only:
+        arguments.pop(0)
+    if len(arguments) > 1 or any(arg.startswith("--") for arg in arguments):
+        print("Usage: python3 src/main.py [--tokens] [source.ember]", file=sys.stderr)
         return 64
-    interpreter = Ember()
+    interpreter = Ember(tokens_only)
     if arguments:
         return interpreter.run_file(arguments[0])
     return interpreter.run_prompt()
@@ -46,3 +72,4 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# --- end AI code ---

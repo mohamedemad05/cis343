@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Print expression trees in parenthesized prefix notation."""
 
 import math
@@ -35,3 +36,4 @@ class AstPrinter:
             text = str(value)
             return text[:-2] if text.endswith(".0") else text
         raise TypeError(f"Unsupported literal type: {type(value).__name__}")
+# --- end AI code ---

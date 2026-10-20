@@ -1,5 +1,8 @@
 # Lab 1: Ember scanner
 
+Compatibility note: in the Lab 3 revision, use `--tokens` to select the original
+scanner-only behavior. Earlier submission commits retain their original commands.
+
 ## Language design
 
 Ember is a small language designed for this scanning lab. The name suggests a
@@ -163,13 +166,13 @@ and `report/`. The recorded results were produced with Python 3.13.1 on macOS.
 Run a UTF-8 source file:
 
 ```sh
-python3 src/main.py test/lab1/inputs/example.ember
+python3 src/main.py --tokens test/lab1/inputs/example.ember
 ```
 
 Start interactive mode:
 
 ```sh
-python3 src/main.py
+python3 src/main.py --tokens
 ```
 
 For example, typing `let count = 2;` produces:

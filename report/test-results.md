@@ -2730,7 +2730,7 @@ Expected:
 stdout:
 (empty)
 stderr:
-Usage: python3 src/main.py [source.ember]
+Usage: python3 src/main.py [--tokens] [source.ember]
 exit status: 64
 ```
 
@@ -2739,7 +2739,7 @@ Actual:
 stdout:
 (empty)
 stderr:
-Usage: python3 src/main.py [source.ember]
+Usage: python3 src/main.py [--tokens] [source.ember]
 exit status: 64
 ```
 

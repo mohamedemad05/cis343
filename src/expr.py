@@ -1,3 +1,4 @@
+# --- start AI code ---
 """Expression nodes for Ember. These store structure without evaluating it."""
 
 from dataclasses import dataclass
@@ -30,3 +31,4 @@ class Binary(Expr):
 @dataclass(frozen=True)
 class Grouping(Expr):
     expression: Expr
+# --- end AI code ---

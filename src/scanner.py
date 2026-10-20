@@ -1,3 +1,4 @@
+# --- start AI code ---
 """A character-by-character scanner, following Chapter 4's approach."""
 
 import math
@@ -171,3 +172,4 @@ class Scanner:
             elif char in ("\n", "\r"):
                 self.newline(char)
         self.error("Unterminated block comment.")
+# --- end AI code ---

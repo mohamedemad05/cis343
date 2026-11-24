@@ -9,6 +9,7 @@ KEYWORDS = {
     "let": T.LET, "fn": T.FN, "say": T.SAY, "if": T.IF, "else": T.ELSE,
     "while": T.WHILE, "return": T.RETURN, "true": T.TRUE, "false": T.FALSE,
     "null": T.NULL, "and": T.AND, "or": T.OR,
+    "var": T.LET, "print": T.SAY, "nil": T.NULL,
 }
 
 SINGLE_CHAR = {

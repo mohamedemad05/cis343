@@ -2,11 +2,26 @@
 
 import math
 
-from expr import Binary, Grouping, Literal, Unary
+from expr import Assign, Binary, Grouping, Literal, Unary, Variable
+from stmt import BlockStmt, ExpressionStmt, PrintStmt, VarStmt
 
 
 class AstPrinter:
     def print(self, expression):
+        if isinstance(expression, Variable):
+            return expression.name.lexeme
+        if isinstance(expression, Assign):
+            return f"(= {expression.name.lexeme} {self.print(expression.value)})"
+        if isinstance(expression, VarStmt):
+            value = "nil" if expression.initializer is None else self.print(expression.initializer)
+            return f"(var {expression.name.lexeme} {value})"
+        if isinstance(expression, ExpressionStmt):
+            return f"(expr {self.print(expression.expression)})"
+        if isinstance(expression, PrintStmt):
+            return f"(print {self.print(expression.expression)})"
+        if isinstance(expression, BlockStmt):
+            children = " ".join(self.print(child) for child in expression.statements)
+            return "(block" + (" " + children if children else "") + ")"
         if isinstance(expression, Literal):
             return self.literal(expression.value)
         if isinstance(expression, Unary):

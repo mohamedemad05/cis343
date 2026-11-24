@@ -1,0 +1,2 @@
+// --- start AI code ---
+var a = "global"; { var a = ; } print a;

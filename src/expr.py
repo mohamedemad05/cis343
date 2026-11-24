@@ -30,3 +30,14 @@ class Binary(Expr):
 @dataclass(frozen=True)
 class Grouping(Expr):
     expression: Expr
+
+
+@dataclass(frozen=True)
+class Variable(Expr):
+    name: Token
+
+
+@dataclass(frozen=True)
+class Assign(Expr):
+    name: Token
+    value: Expr

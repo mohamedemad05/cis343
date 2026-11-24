@@ -1,0 +1,2 @@
+// --- start AI code ---
+let a; say a; a = null; print a; var b = nil; say b;

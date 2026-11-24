@@ -38,10 +38,12 @@ CASES = [
      "let fn say if else while return true false null and or",
      [token(word.upper(), word) for word in
       "let fn say if else while return true false null and or".split()] + [eof()], []),
-    ("identifiers", "Underscores, digits, keyword prefixes, case, and old Lox words.",
+    ("identifiers", "Underscores, digits, keyword prefixes, case, and textbook keyword aliases.",
      "_ _x a9 letdown Let TRUE var print nil class",
      [token("IDENTIFIER", word) for word in
-      "_ _x a9 letdown Let TRUE var print nil class".split()] + [eof()], []),
+      "_ _x a9 letdown Let TRUE".split()]
+     + [token("LET", "var"), token("SAY", "print"), token("NULL", "nil"),
+        token("IDENTIFIER", "class"), eof()], []),
     ("numbers", "Integers, decimals, leading zeros, and a separate minus token.",
      "0 42 001 3.14 -0.5",
      [token("NUMBER", "0", 0.0), token("NUMBER", "42", 42.0),

@@ -1,0 +1,2 @@
+// --- start AI code ---
+var a; var b; print a = b = 3; print a; print b;

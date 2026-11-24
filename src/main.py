@@ -1,15 +1,17 @@
-"""Scan, parse, and print one Ember expression from a file or terminal input."""
+"""Scan, parse, and execute Ember statements (or run the legacy token mode)."""
 
 import sys
-
 from scanner import Scanner
 from parser import ParseError, Parser
 from ast_printer import AstPrinter
+from interpreter import Interpreter, EmberRuntimeError
 
-
+# --- start AI code ---
 class Ember:
-    def __init__(self, tokens_only=False):
+    def __init__(self, tokens_only=False, ast_only=False):
         self.tokens_only = tokens_only
+        self.ast_only = ast_only
+        self.interpreter = Interpreter()
 
     def run(self, source):
         scanner = Scanner(source)
@@ -23,18 +25,29 @@ class Ember:
             return 65
         if self.tokens_only:
             return 0
-        try:
-            tree = Parser(tokens).parse()
-            output = AstPrinter().print(tree)
-        except ParseError as error:
+        parser = Parser(tokens)
+        if self.ast_only:
+            try:
+                print(AstPrinter().print(parser.parse_expression()))
+            except ParseError as error:
+                print(error, file=sys.stderr)
+                return 65
+            except RecursionError:
+                print("Error: Expression tree is too deep to print.", file=sys.stderr)
+                return 65
+            return 0
+        statements = parser.parse()
+        for error in parser.errors:
             print(error, file=sys.stderr)
-            return 65
+        try:
+            self.interpreter.execute(statements)
         except RecursionError:
-            print(f"[line {tokens[0].line}] Error: Expression tree is too deep to print.", file=sys.stderr)
-            return 65
-        # Build the whole string before printing, so errors never leave a partial AST.
-        print(output)
-        return 0
+            print("Runtime error: Expression or block is too deeply nested.", file=sys.stderr)
+            return 70
+        except EmberRuntimeError as error:
+            print(f"Runtime error: {error}", file=sys.stderr)
+            return 70
+        return 65 if parser.errors else 0
 
     def run_file(self, path):
         try:
@@ -58,12 +71,13 @@ class Ember:
 def main(argv=None):
     arguments = list(sys.argv[1:] if argv is None else argv)
     tokens_only = bool(arguments and arguments[0] == "--tokens")
-    if tokens_only:
+    ast_only = bool(arguments and arguments[0] == "--ast")
+    if tokens_only or ast_only:
         arguments.pop(0)
     if len(arguments) > 1 or any(arg.startswith("--") for arg in arguments):
-        print("Usage: python3 src/main.py [--tokens] [source.ember]", file=sys.stderr)
+        print("Usage: python3 src/main.py [--tokens | --ast] [source.ember]", file=sys.stderr)
         return 64
-    interpreter = Ember(tokens_only)
+    interpreter = Ember(tokens_only, ast_only)
     if arguments:
         return interpreter.run_file(arguments[0])
     return interpreter.run_prompt()
@@ -71,3 +85,4 @@ def main(argv=None):
 
 if __name__ == "__main__":
     raise SystemExit(main())
+# --- end AI code ---

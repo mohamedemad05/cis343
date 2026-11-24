@@ -108,7 +108,7 @@ def main():
     check("interactive EOF", "EOF immediately exits cleanly.",
           repr(""), (prompt + "\n", "", 0), cli([]))
     check("usage", "More than one file is a usage error.", "arguments: a b",
-          ("", "Usage: python3 src/main.py [--tokens] [source.ember]\n", 64), cli(["a", "b"]))
+          ("", "Usage: python3 src/main.py [--tokens | --ast] [source.ember]\n", 64), cli(["a", "b"]))
     with tempfile.TemporaryDirectory() as directory:
         missing = Path(directory) / "missing.ember"
         read_error = ("", "Error: Cannot read source file (UTF-8 required).\n", 66)

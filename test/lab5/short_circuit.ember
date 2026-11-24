@@ -1,0 +1,2 @@
+// --- start AI code ---
+var a = 0; false and (a = 1); true or (a = 2); print a;

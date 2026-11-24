@@ -1,0 +1,2 @@
+// --- start AI code ---
+var score = 10; print score; score = score + 5; print score;

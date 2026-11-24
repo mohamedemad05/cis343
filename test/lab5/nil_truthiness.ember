@@ -1,0 +1,2 @@
+// --- start AI code ---
+var a; print !a; print a == nil; print 0 == false;
